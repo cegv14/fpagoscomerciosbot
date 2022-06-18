@@ -1,0 +1,24 @@
+{
+  "name": "fpagoscomerciotelegrambot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "jimp": "^0.16.1",
+    "moment": "^2.29.3",
+    "moment-timezone": "^0.5.34",
+    "node-cache": "^5.1.2",
+    "node-fetch": "2.0",
+    "node-telegram-bot-api": "^0.57.0",
+    "ocr-space-api-wrapper": "^2.1.1",
+    "pg": "^8.7.3",
+    "tesseract.js": "^2.1.1",
+    "wasm-image-to-black-white": "^0.4.2"
+  }
+}
