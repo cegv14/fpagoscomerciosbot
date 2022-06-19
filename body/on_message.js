@@ -54,6 +54,11 @@ function fecha_hora_suma_minuto(min){
     return fecha;
 }
 
+function fecha_hora_resta_minuto(min){
+    var fecha = moment().tz('America/Caracas').subtract(min, 'minutes').format('YYYY-MM-DD HH:mm:ss');
+    return fecha;
+}
+
 function fecha_esp_hora_suma_minuto(min, fecha){
     //YYYY-MM-DD HH24:MI:SS
     var fecha = moment(fecha).tz('America/Caracas').add(min, 'minutes').format('YYYY-MM-DD HH:mm:ss');
@@ -747,7 +752,7 @@ if(msg.photo){
             var sqlm = `SELECT pagos.monto, pagos.referencia, (SELECT TO_CHAR(fecha_de_actualizacion,'YYYY-MM-DD HH24:MI:SS') AS fecha2
                       FROM public.config_estado_robot
                       WHERE id = 1) FROM public.pagos 
-            WHERE fecha >= '`+fecha_hora_actual().toString()+`' and fecha <= '`+fecha_hora_suma_minuto(5).toString()+`'
+            WHERE fecha >= '`+fecha_hora_resta_minuto(8)+`'
             and monto = `+msg_save1[msg.chat.id]+` and verificado = false;`;
             console.log(sqlm)
             await sql.query(sqlm).then(async result => {

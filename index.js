@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { bot } = require("./configuracion/telegram/config_telegram");
 const callback = require("./body/on_callback");
 const text = require("./body/on_text");
