@@ -729,6 +729,7 @@ if(msg.photo){
         ruta[msg.chat.id] = "Consultar_pago2";
         msg_save1[msg.chat.id] = msg.text;
         var msgg= await fmensaje.crear(msg.chat.id, "🕐 <b>Consultando Pago</b>\n<b>Monto:</b> "+msg_save1[msg.chat.id], mainopts);
+        await sleep(5000);
         //Consultar Actividad
         var sqlm = `SELECT TO_CHAR(fecha_de_actualizacion,'YYYY-MM-DD HH24:MI:SS') AS fecha2
                       FROM public.config_estado_robot
@@ -778,7 +779,7 @@ if(msg.photo){
                 }else{
                     intentos[msg.chat.id] = 1;
                 }
-                await fmensaje.crear(msg.chat.id, "❌ <b>"+actividad2+"</b>  No se encontro ninguna pago", mainopts);
+                await fmensaje.crear(msg.chat.id, "❌ <b>"+actividad2+"</b>  No se encontro ninguna pago vuelva a intentarlo", mainopts);
               }
           });
             
