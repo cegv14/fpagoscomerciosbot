@@ -779,7 +779,7 @@ if(msg.photo){
                 }else{
                     intentos[msg.chat.id] = 1;
                 }
-                await fmensaje.crear(msg.chat.id, "❌ <b>"+actividad2+"</b>  No se encontro ninguna pago vuelva a intentarlo", mainopts);
+                await fmensaje.crear(msg.chat.id, "❌ <b>"+actividad2+"</b>  No se encontro ningun pago por el monto: "+msg_save1[msg.chat.id]+" dentro de los 30 minutos.", mainopts);
               }
           });
             
