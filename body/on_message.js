@@ -752,7 +752,7 @@ if(msg.photo){
             var sqlm = `SELECT pagos.monto, pagos.referencia, (SELECT TO_CHAR(fecha_de_actualizacion,'YYYY-MM-DD HH24:MI:SS') AS fecha2
                       FROM public.config_estado_robot
                       WHERE id = 1) FROM public.pagos 
-            WHERE fecha >= '`+fecha_hora_resta_minuto(8)+`'
+            WHERE fecha >= '`+fecha_hora_resta_minuto(30)+`'
             and monto = `+msg_save1[msg.chat.id]+` and verificado = false;`;
             console.log(sqlm)
             await sql.query(sqlm).then(async result => {
@@ -791,7 +791,7 @@ if(msg.photo){
         return
     }
 
-    fmensaje.crear(msg.chat.id, "Envia una captura de pantalla de la transferencia", mainopts);
+    
 }
 
 
