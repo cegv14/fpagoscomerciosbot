@@ -447,7 +447,7 @@ async function consultar_pago_verificado(monto, referencia, telegram){
     return new Promise(async resolve => {
         await sleep(5000)
         console.log("consultando pago")
-        var sqlm = `SELECT id FROM public.pagos WHERE monto = `+monto+` and referencia LIKE '%`+referencia+`%' and verificado=true`;
+        var sqlm = `SELECT hora_validado,id, validado_usuario FROM public.pagos WHERE monto = `+monto+` and referencia LIKE '%`+referencia+`%' and verificado=true`;
         console.log(sqlm)
         await sql.query(sqlm).then(async result => {
           if(result.rows.length == 0){
@@ -466,9 +466,17 @@ async function consultar_pago_verificado(monto, referencia, telegram){
             }
             
           }else{
-            await fmensaje.eliminar_mensaje2(telegram, msg_save3[telegram]);
-            await fmensaje.crear(telegram, "✅ <b>Se ha validado satisfactoriamente.</b>\n<b>Monto:</b> "+monto+"\n<b>Referencia: </b>"+referencia, mainopts);
-            resolve([true, result.rows[0]]);
+            if(result.rows[0].validado_usuario){
+                await fmensaje.crear(telegram, "⚠️ <b>Este pago ya fue validado antes, Fecha: "+result.rows[0].hora_validado+".</b>\n<b>Monto:</b> "+monto+"\n<b>Referencia: </b>"+referencia, mainopts);
+            }else{
+                var stmt6 = `UPDATE public.pagos
+                SET validado_usuario=true
+                WHERE id = `+result.rows[0].id;
+                await fmensaje.eliminar_mensaje2(telegram, msg_save3[telegram]);
+                await fmensaje.crear(telegram, "✅ <b>Se ha validado satisfactoriamente.</b>\n<b>Monto:</b> "+monto+"\n<b>Referencia: </b>"+referencia, mainopts);
+                resolve([true, result.rows[0]]);
+            }
+            
           }
       });
     });
