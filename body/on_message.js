@@ -447,7 +447,7 @@ async function consultar_pago_verificado(monto, referencia, telegram){
     return new Promise(async resolve => {
         await sleep(5000)
         console.log("consultando pago")
-        var sqlm = `SELECT hora_validado,id, validado_usuario FROM public.pagos WHERE monto = `+monto+` and referencia LIKE '%`+referencia+`%' and verificado=true`;
+        var sqlm = `SELECT hora_validado,id, validado_usuario FROM public.pagos WHERE monto = `+monto+` and referencia LIKE '%`+referencia+`%' and verificado=true and empresa_id = 33`;
         console.log(sqlm)
         await sql.query(sqlm).then(async result => {
           if(result.rows.length == 0){
