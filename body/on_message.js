@@ -472,9 +472,12 @@ async function consultar_pago_verificado(monto, referencia, telegram){
                 var stmt6 = `UPDATE public.pagos
                 SET validado_usuario=true
                 WHERE id = `+result.rows[0].id;
-                await fmensaje.eliminar_mensaje2(telegram, msg_save3[telegram]);
-                await fmensaje.crear(telegram, "✅ <b>Se ha validado satisfactoriamente.</b>\n<b>Monto:</b> "+monto+"\n<b>Referencia: </b>"+referencia, mainopts);
-                resolve([true, result.rows[0]]);
+                await sql.query(stmt6).then(async result => {
+                    await fmensaje.eliminar_mensaje2(telegram, msg_save3[telegram]);
+                    await fmensaje.crear(telegram, "✅ <b>Se ha validado satisfactoriamente.</b>\n<b>Monto:</b> "+monto+"\n<b>Referencia: </b>"+referencia, mainopts);
+                    resolve([true, result.rows[0]]);
+                });
+                
             }
             
           }
