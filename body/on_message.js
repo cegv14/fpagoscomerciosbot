@@ -695,6 +695,14 @@ if(msg.photo){
     if(ruta[msg.chat.id] == "Validar_pago2"){
         ruta[msg.chat.id] = "Validar_pago3";
         msg_save2[msg.chat.id] = msg.text;
+        if(msg_save2[msg.chat.id].length >= 4 && msg_save2[msg.chat.id].length <= 20){
+            var contador = msg_save2[msg.chat.id].length -4;
+            msg_save2[msg.chat.id] =msg_save2[msg.chat.id].substr(contador, 99)
+        }else{
+            await fmensaje.crear(msg.chat.id, "Numero de referencia invalido, debe ser mayor a 4 digitos", mainopts);
+            limpiar(msg.chat.id)
+            return
+        }
         msg_save3[msg.chat.id] = await fmensaje.crear(msg.chat.id, "🕐 <b>Validando Pago</b>\n<b>Monto:</b> "+msg_save1[msg.chat.id]+"\n<b>Referencia: </b>"+msg_save2[msg.chat.id], mainopts);
         consultar_insertar_validacion(msg_save1[msg.chat.id], msg_save2[msg.chat.id], msg.chat.id)
         return
