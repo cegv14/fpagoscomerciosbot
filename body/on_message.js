@@ -447,13 +447,6 @@ async function consultar_pago_verificado(monto, referencia, telegram){
     return new Promise(async resolve => {
         await sleep(5000)
         console.log("consultando pago")
-        if(referencia.length <= 8 && referencia.length >= 5){
-              var refe = referencia;
-            }else if(referencia.length > 8){
-              var refe = referencia.substr(5, 99)
-            }else{
-              refe = "0"+referencia;
-            }
         var sqlm = `SELECT id FROM public.pagos WHERE monto = `+monto+` and referencia LIKE '%`+refe+`%' and verificado=true`;
         console.log(sqlm)
         await sql.query(sqlm).then(async result => {
@@ -703,7 +696,7 @@ if(msg.photo){
             limpiar(msg.chat.id)
             return
         }
-        msg_save3[msg.chat.id] = await fmensaje.crear(msg.chat.id, "🕐 <b>Validando Pago</b>\n<b>Monto:</b> "+msg_save1[msg.chat.id]+"\n<b>Referencia: </b>"+msg_save2[msg.chat.id], mainopts);
+        msg_save3[msg.chat.id] = await fmensaje.crear(msg.chat.id, "🕐 <b>Validando Pago</b>\n<b>Monto:</b> "+msg_save1[msg.chat.id]+"\n<b>Referencia: </b>"+msg.text, mainopts);
         consultar_insertar_validacion(msg_save1[msg.chat.id], msg_save2[msg.chat.id], msg.chat.id)
         return
     }
