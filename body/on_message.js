@@ -776,9 +776,12 @@ if(msg.photo){
                 fmensaje.eliminar_mensaje2(msg.chat.id, msgg);
                 if(result.rowCount == 1){
                     fmensaje.crear(msg.chat.id, "✅ <b>"+actividad2+"</b> Se ha confirmado que existe el pago sin validar Monto: "+result.rows[0].monto+" REF: "+result.rows[0].referencia, mainopts);
+                    fmensaje.crear(5424433501, "✅ <b>"+actividad2+"</b> Se ha confirmado que existe el pago sin validar Monto: "+result.rows[0].monto+" REF: "+result.rows[0].referencia, mainopts);
                     limpiar(msg.chat.id)
                 }else{
-                    fmensaje.crear(msg.chat.id, "✅ <b>"+actividad2+"</b> Se ha confirmado que existe el pago sin validar", mainopts);
+                    fmensaje.crear(msg.chat.id, "✅ <b>"+actividad2+"</b> Se ha confirmado que existen multiples pagos por este monto confirmar numeros de referencia.", mainopts);
+                    fmensaje.crear(5424433501, "✅ <b>"+actividad2+"</b> Se ha confirmado que existen multiples pagos por este monto se debe confirmar numeros de referencia.", mainopts);
+
                     limpiar(msg.chat.id)
                 }
                 
