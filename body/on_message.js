@@ -489,7 +489,7 @@ async function consultar_pago_verificado(monto, referencia, telegram){
 function message(bot){
 
 bot.on('message', async (msg, match) => {
-    
+console.log(msg)
  //VALIDACIONES   
 if (!checkSpam(msg)){
     return;
